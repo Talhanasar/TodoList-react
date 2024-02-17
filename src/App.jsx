@@ -110,7 +110,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="lower flex justify-center">
+      <div className="lower flex justify-center px-5">
         <div className="box sm:w-[35%] h-[88vh] mt-3 bg-secondary p-3 px-4 rounded-lg">
           <h1 className="text-center text-3xl my-4">Welcome to Task Manager</h1>
           <div className="head">
