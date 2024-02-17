@@ -2,6 +2,9 @@ import { useState, useEffect,useRef } from 'react'
 import Navbar from './components/Navbar'
 import { v4 as uuidv4 } from 'uuid';
 import authService from './appwrite/auth';
+import { MdDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+
 
 function App() {
   const [todos, settodos] = useState([])
@@ -111,7 +114,7 @@ function App() {
     <>
       <Navbar />
       <div className="lower flex justify-center px-5">
-        <div className="box sm:w-[35%] h-[88vh] mt-3 bg-secondary p-3 px-4 rounded-lg">
+        <div className="box sm:w-[35%] h-[80vh] sm:h-[88vh] mt-3 bg-secondary p-3 px-4 rounded-lg">
           <h1 className="text-center text-3xl my-4">Welcome to Task Manager</h1>
           <div className="head">
             <h2 className='text-xl mb-3'>Add Todo</h2>
@@ -137,8 +140,8 @@ function App() {
                       <label htmlFor={item.id}className={`ml-2 text-xs ${item.isCompleted?"line-through":""}`}>{item.todo}</label>
                     </div>
                     <div className="editing">
-                      <button className='px-2 rounded-md mx-2 bg-primary text-sm py-1' onClick={(e)=>{handleEdit(e,item.id)}}>edit</button>
-                      <button className='px-2 rounded-md mx-2 bg-primary text-sm py-1' onClick={(e)=>{handleDelete(e,item.id)}}>delete</button>
+                      <button className='px-2 rounded-md mx-2 bg-primary text-xs sm:text-sm py-1' onClick={(e)=>{handleEdit(e,item.id)}}><FaRegEdit /></button>
+                      <button className='px-2 rounded-md mx-2 bg-primary text-xs sm:text-sm py-1' onClick={(e)=>{handleDelete(e,item.id)}}><MdDelete /></button>
                     </div>
                   </div>
                 })}
