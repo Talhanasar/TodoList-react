@@ -132,8 +132,8 @@ function App() {
             <div className="last space-y-4 h-[80%]">
               <h2 className='text-xl'>Your Todos</h2>
               <div className="all-todos overflow-y-auto h-[90%] scrollbar scrollbar scrollbar-thin">
-               { todos.length == 0 ? <div className='ml-3 text-gray-500'>No todos to display</div>: 
-                (finished && !todos.find(i => i.isCompleted == true)) ? <div className='ml-3 text-gray-500'>Not Completed any tasks yet</div>: (!finished && !todos.find(i=>i.isCompleted == false)) && <div className='ml-3 text-gray-500'>No Tasks there to Do</div>
+               { todos.length == 0 ? <div className='ml-3 text-gray-500 text-sm'>No todos to display</div>: 
+                (finished && !todos.find(i => i.isCompleted == true)) ? <div className='ml-3 text-gray-500 text-sm'>Not Completed any tasks yet</div>: (!finished && !todos.find(i=>i.isCompleted == false)) && <div className='ml-3 text-gray-500 text-sm'>No Tasks there to Do</div>
                }
                 {todos.map((item) => {
                   return (finished && item.isCompleted || !finished && !item.isCompleted) && (
