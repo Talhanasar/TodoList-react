@@ -132,9 +132,12 @@ function App() {
             <div className="last space-y-4 h-[80%]">
               <h2 className='text-xl'>Your Todos</h2>
               <div className="all-todos overflow-y-auto h-[90%] scrollbar scrollbar scrollbar-thin">
-               {todos.length == 0 && <div className='ml-3 text-gray-500'>No todos to display</div> }
+               { todos.length == 0 ? <div className='ml-3 text-gray-500'>No todos to display</div>: 
+                (finished && !todos.find(i => i.isCompleted == true)) ? <div className='ml-3 text-gray-500'>Not Completed any tasks yet</div>: (!finished && !todos.find(i=>i.isCompleted == false)) && <div className='ml-3 text-gray-500'>No Tasks there to Do</div>
+               }
                 {todos.map((item) => {
-                  return (finished && item.isCompleted || !finished && !item.isCompleted) && <div key={item.id} className="todo flex justify-between my-2 items-center">
+                  return (finished && item.isCompleted || !finished && !item.isCompleted) && (
+                  <div key={item.id} className="todo flex justify-between my-2 items-center">
                     <div className="todo-text flex items-center">
                       <input onChange={handleCheckbox} type="checkbox" name={item.id} id={item.id} checked= {item.isCompleted} />
                       <label htmlFor={item.id}className={`ml-2 text-xs ${item.isCompleted?"line-through":""}`}>{item.todo}</label>
@@ -143,7 +146,7 @@ function App() {
                       <button className='px-2 rounded-md mx-2 bg-primary text-xs sm:text-sm py-1' onClick={(e)=>{handleEdit(e,item.id)}}><FaRegEdit /></button>
                       <button className='px-2 rounded-md mx-2 bg-primary text-xs sm:text-sm py-1' onClick={(e)=>{handleDelete(e,item.id)}}><MdDelete /></button>
                     </div>
-                  </div>
+                  </div>)
                 })}
               </div>
 
