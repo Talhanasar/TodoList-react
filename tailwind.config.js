@@ -1,8 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  plugins: [
-    require('tailwind-scrollbar')({ nocompatible: true }),
-  ],
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -10,10 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#FFA351FF',
-        secondary: '#FFBE7BFF',
-        third: '#EED971FF'
-        // ...
+        primary: '#FFA351',
+        secondary: '#FFBE7B',
+        third: '#EED971'
+      },
+      boxShadow: {
+        neu: '8px 8px 16px #DFA162, -8px -8px 16px #FFD8A3',
+        insetNeu: 'inset 8px 8px 16px #DFA162, inset -8px -8px 16px #FFD8A3',
       },
     },
   },
