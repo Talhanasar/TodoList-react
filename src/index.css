@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.todo-container::-webkit-scrollbar {
+    width: 2px; /* Set initial width to 6px */
+}
+
+.todo-container::-webkit-scrollbar-track {
+    background-color: #efcead; /* Track background */
+    border-radius: 10px;
+}
+
+.todo-container::-webkit-scrollbar-thumb {
+    background-color: #FFA351; /* Thumb background */
+    border-radius: 10px; /* Thumb border radius */
+}

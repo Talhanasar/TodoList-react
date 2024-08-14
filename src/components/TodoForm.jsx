@@ -1,13 +1,8 @@
-import { useRef, useState } from "react";
-
-export const TodoForm = ({onSubmitForm})=>{
-    const inputRef = useRef(null);
-    const [inputValue, setInputValue] = useState("");
+export const TodoForm = ({onSubmitForm,setInputValue,inputValue,inputRef})=>{
 
     const handleFormSubmit = (event)=>{
         event.preventDefault();
-        onSubmitForm(inputValue);
-        setInputValue("");
+        onSubmitForm();
     }
     return(
         <div className="head">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Todo from './components/Todo';
 import { TodoForm } from './components/TodoForm';
@@ -8,11 +8,12 @@ const TodoApp = () => {
   
   // Retrieve tasks from localStorage on initial render
   const [tasks, settasks] = useState(() => {
-    const rawTodos = localStorage.getItem(todoKey);
-    if (!rawTodos) return []; // If there's no data in localStorage, return an empty array
-      return JSON.parse(rawTodos); // Try to parse the JSON string
+    const rawTodos = JSON.parse(localStorage.getItem(todoKey));
+    return rawTodos ?? [];
   });
 
+  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState("");
   const [showCompleted, setShowCompleted] = useState(false);
   const [DateTime, setDateTime] = useState("");
 
@@ -29,14 +30,14 @@ const TodoApp = () => {
       const formattedTime = now.toLocaleTimeString();
       setDateTime(`${formattedDate} - ${formattedTime}`);
     }, 1000);
-    // Clear the interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
 
-  const handleFormSubmit = (inputValue) => {
+  const handleFormSubmit = () => {
     if (!inputValue) return;
     if (tasks.find(task => task.data === inputValue)) return;
     settasks((prev) => [...prev, { data: inputValue, isCompleted: false }]);
+    setInputValue("");
   };
 
   const handleDone = (value) => {
@@ -66,11 +67,16 @@ const TodoApp = () => {
   return (
     <>
       <Navbar />
-      <section className="lower flex justify-center px-5">
-        <div className="box lg:w-[35%] h-[80vh] sm:h-[88vh] mt-3 bg-secondary p-3 px-4 rounded-lg">
+      <section className="lower px-5 flex justify-center ">
+        <div className="box lg:w-[35%] h-[80vh] sm:min-h-[calc(100vh-80px)] mt-3 bg-secondary p-3 px-4 rounded-lg">
           <h1 className="text-center text-3xl my-4">Welcome to tasks Manager</h1>
-          <h2 className='text-center'> {DateTime} </h2>
-          <TodoForm onSubmitForm={handleFormSubmit} />
+          <h2 className='text-center text-white font-bold'> {DateTime} </h2>
+          <TodoForm 
+            onSubmitForm={handleFormSubmit}
+            inputRef={inputRef}
+            setInputValue={setInputValue}
+            inputValue={inputValue}
+          />
           <div className="bottom flex flex-col gap-3 pt-3 h-[70%]">
             <div className="check flex">
               <input
@@ -87,7 +93,7 @@ const TodoApp = () => {
             <div className="h-[1px] bg-primary"></div>
             <section className="last space-y-4 h-[80%]">
               <h2 className="text-xl">Your Todos</h2>
-              <div className="all-todos overflow-y-auto h-[90%] scrollbar scrollbar-thin">
+              <div className={`todo-container overflow-y-auto h-[calc(100%-44px)]`}>
                 {tasks.length < 1 ? (
                   <div className="ml-3 text-gray-500 text-sm">No todos to display</div>
                 ) : filteredTasks.length < 1 ? (
